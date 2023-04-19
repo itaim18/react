@@ -1131,8 +1131,8 @@ function commitLayoutEffectOnFiber(
         }
         break;
       }
+      // Fall through
     }
-    // eslint-disable-next-line-no-fallthrough
     case HostSingleton:
     case HostComponent: {
       recursivelyTraverseLayoutEffects(
@@ -1829,8 +1829,8 @@ function commitPlacement(finishedWork: Fiber): void {
         insertOrAppendPlacementNode(finishedWork, before, parent);
         break;
       }
+      // Fall through
     }
-    // eslint-disable-next-line no-fallthrough
     case HostComponent: {
       const parent: Instance = parentFiber.stateNode;
       if (parentFiber.flags & ContentReset) {
@@ -1853,7 +1853,6 @@ function commitPlacement(finishedWork: Fiber): void {
       insertOrAppendPlacementNodeIntoContainer(finishedWork, before, parent);
       break;
     }
-    // eslint-disable-next-line-no-fallthrough
     default:
       throw new Error(
         'Invalid host parent fiber. This error is likely caused by a bug ' +
@@ -2044,8 +2043,8 @@ function commitDeletionEffectsOnFiber(
         }
         return;
       }
+      // Fall through
     }
-    // eslint-disable-next-line no-fallthrough
     case HostSingleton: {
       if (enableHostSingletons && supportsSingletons) {
         if (!offscreenSubtreeWasHidden) {
@@ -2073,15 +2072,14 @@ function commitDeletionEffectsOnFiber(
 
         return;
       }
+      // Fall through
     }
-    // eslint-disable-next-line no-fallthrough
     case HostComponent: {
       if (!offscreenSubtreeWasHidden) {
         safelyDetachRef(deletedFiber, nearestMountedAncestor);
       }
       // Intentional fallthrough to next branch
     }
-    // eslint-disable-next-line-no-fallthrough
     case HostText: {
       // We only need to remove the nearest host child. Set the host parent
       // to `null` on the stack to indicate that nested children don't
@@ -2714,8 +2712,8 @@ function commitMutationEffectsOnFiber(
         }
         return;
       }
+      // Fall through
     }
-    // eslint-disable-next-line-no-fallthrough
     case HostSingleton: {
       if (enableHostSingletons && supportsSingletons) {
         if (flags & Update) {
@@ -2734,8 +2732,8 @@ function commitMutationEffectsOnFiber(
           }
         }
       }
+      // Fall through
     }
-    // eslint-disable-next-line-no-fallthrough
     case HostComponent: {
       recursivelyTraverseMutationEffects(root, finishedWork, lanes);
       commitReconciliationEffects(finishedWork);
@@ -3779,7 +3777,6 @@ function commitPassiveMountOnFiber(
       }
       // Intentional fallthrough to next branch
     }
-    // eslint-disable-next-line-no-fallthrough
     default: {
       recursivelyTraversePassiveMountEffects(
         finishedRoot,
@@ -3973,7 +3970,6 @@ export function reconnectPassiveEffects(
       }
       // Intentional fallthrough to next branch
     }
-    // eslint-disable-next-line-no-fallthrough
     default: {
       recursivelyTraverseReconnectPassiveEffects(
         finishedRoot,
@@ -4054,7 +4050,6 @@ function commitAtomicPassiveEffects(
       }
       break;
     }
-    // eslint-disable-next-line-no-fallthrough
     default: {
       recursivelyTraverseAtomicPassiveEffects(
         finishedRoot,
